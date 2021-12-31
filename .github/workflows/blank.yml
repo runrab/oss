@@ -15,6 +15,7 @@ jobs:
           git init
           git config user.name "${{secrets.USER_NAME}}"
           git config user.email "${{secrets.EMAIL}}"
+          git remote rm origin
           git remote add origin https://github.com/ismech/oss.git
           git remote set-url origin https://${{github.actor}}:${{secrets.TOKEN}}@github.com/ismech/oss.git
           git clone https://github.com/ismech/oss.git
