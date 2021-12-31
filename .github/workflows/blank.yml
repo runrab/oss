@@ -1,0 +1,25 @@
+name: oss push 
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: starting
+        uses: actions/checkout@v2
+
+      - name: oss
+        run: |
+          git init
+          git config user.name "${{secrets.USER_NAME}}"
+          git config user.email "${{secrets.EMAIL}}"
+          echo `date`
+          echo `date` > data.txt
+          git add .
+          git remote add origin https://github.com/ismech/confg
+          git remote set-url origin https://${{github.actor}}:${{secrets.TOKEN}}@github.com/ismech/ismech.github.io.git
+          git commit --allow-empty -m 'oss'
+          git branch -M main
+          git push -f -u origin main
