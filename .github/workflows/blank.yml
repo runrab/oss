@@ -15,11 +15,13 @@ jobs:
           git init
           git config user.name "${{secrets.USER_NAME}}"
           git config user.email "${{secrets.EMAIL}}"
+          git remote add origin https://github.com/ismech/oss.git
+          git remote set-url origin https://${{github.actor}}:${{secrets.TOKEN}}@github.com/ismech/oss.git
+          git clone https://github.com/ismech/oss.git
+          cd ./oss
           echo `date`
           echo `date` > data.txt
           git add .
-          git remote add origin https://github.com/ismech/confg
-          git remote set-url origin https://${{github.actor}}:${{secrets.TOKEN}}@github.com/ismech/ismech.github.io.git
           git commit --allow-empty -m 'oss'
           git branch -M main
           git push -f -u origin main
